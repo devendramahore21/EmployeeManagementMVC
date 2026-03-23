@@ -1,0 +1,123 @@
+﻿@using EmployeeManagementMVC.ViewModels
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+@* @model X.PagedList.IPagedList<EmployeeManagementMVC.DTOs.EmployeeDTO> *@
+@model PagedResult<EmployeeManagementMVC.DTOs.EmployeeDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Employee List</h1>
+
+<div class="d-flex justify-content-between mb-3">
+    <form method="get" class="d-flex">
+        <input type="text" name="searchString" value="@ViewBag.CurrentFilter"
+               class="form-control me-2" placeholder="Search by name..." />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <a asp-action="Create" class="btn btn-success">+ Create Employee</a>
+</div>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            @if (Model.Items.Any())
+            {
+                <th>                    
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewBag.NameSortParam"
+                       asp-route-searchString="@ViewBag.CurrentFilter">
+                       Name
+                        @(ViewBag.CurrentSort == "name_desc" ? "🔽" : "🔼")
+                   </a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewBag.EmailSortParam"
+                       asp-route-searchString="@ViewBag.CurrentFilter">
+                        Email
+                        @(ViewBag.CurrentSort == "email_desc" ? "🔽" : "🔼")
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.First().Department)
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewBag.SalarySortParam"
+                       asp-route-searchString="@ViewBag.CurrentFilter">
+                        Salary
+                        @(ViewBag.CurrentSort == "salary_desc" ? "🔽" : "🔼")
+                    </a>
+                </th>
+                <th>Actions</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<nav>
+    <ul class="pagination justify-content-center">
+
+        <!-- Previous -->
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+            <a class="page-link"
+               asp-action="Index"
+               asp-route-page="@(Model.PageNumber - 1)"
+               asp-route-search="@ViewBag.CurrentFilter"
+               asp-route-sortOrder="@ViewBag.CurrentSort">
+                Previous
+            </a>
+        </li>
+
+        <!-- Page Numbers -->
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@i"
+                   asp-route-search="@ViewBag.CurrentFilter"
+                   asp-route-sortOrder="@ViewBag.CurrentSort">
+                    @i
+                </a>
+            </li>
+        }
+
+        <!-- Next -->
+        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link"
+               asp-action="Index"
+               asp-route-page="@(Model.PageNumber + 1)"
+               asp-route-search="@ViewBag.CurrentFilter"
+               asp-route-sortOrder="@ViewBag.CurrentSort">
+                Next
+            </a>
+        </li>
+
+    </ul>
+</nav>
