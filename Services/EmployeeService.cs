@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using EmployeeManagementMVC.DTOs;
 using EmployeeManagementMVC.Models;
-using EmployeeManagementMVC.Repositories;
 using EmployeeManagementMVC.Specifications;
 using EmployeeManagementMVC.UnitOfWork;
 using EmployeeManagementMVC.ViewModels;
-using X.PagedList;
-using X.PagedList.Extensions;
 
 namespace EmployeeManagementMVC.Services
 {

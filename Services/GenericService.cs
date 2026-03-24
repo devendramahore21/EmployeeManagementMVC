@@ -13,8 +13,8 @@ namespace EmployeeManagementMVC.Services
 
         public GenericService(IGenericRepository<TEntity> repository, IMapper mapper)
         {
-                _repository = repository;
-                _mapper = mapper;
+            _repository = repository;
+            _mapper = mapper;
         }
         public async Task AddAsync(TDto dto)
         {

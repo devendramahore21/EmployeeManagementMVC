@@ -1,7 +1,6 @@
 ﻿using EmployeeManagementMVC.DTOs;
 using EmployeeManagementMVC.RequestModels;
 using EmployeeManagementMVC.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagementMVC.Controllers

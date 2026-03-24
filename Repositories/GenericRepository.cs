@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagementMVC.Repositories
 {
-    public class GenericRepository<T>:IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(ApplicationDbContext context)
         {
-                _context = context;
-                _dbSet = context.Set<T>();
+            _context = context;
+            _dbSet = context.Set<T>();
         }
 
         public async Task AddAsync(T entity)
@@ -24,7 +24,7 @@ namespace EmployeeManagementMVC.Repositories
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity != null)
-             _dbSet.Remove(entity);
+                _dbSet.Remove(entity);
         }
 
         public IQueryable<T> GetAll()

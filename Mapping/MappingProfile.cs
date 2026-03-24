@@ -4,7 +4,7 @@ using EmployeeManagementMVC.Models;
 
 namespace EmployeeManagementMVC.Mapping
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {

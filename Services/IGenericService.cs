@@ -1,6 +1,4 @@
-﻿using EmployeeManagementMVC.DTOs;
-
-namespace EmployeeManagementMVC.Services
+﻿namespace EmployeeManagementMVC.Services
 {
     public interface IGenericService<TDto>
     {
@@ -13,6 +11,6 @@ namespace EmployeeManagementMVC.Services
         Task UpdateAsync(TDto dto);
 
         Task DeleteAsync(int id);
-        
+
     }
 }

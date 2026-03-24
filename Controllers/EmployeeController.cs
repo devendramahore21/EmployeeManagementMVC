@@ -1,22 +1,13 @@
-﻿using EmployeeManagementMVC.Data;
-using EmployeeManagementMVC.DTOs;
-using EmployeeManagementMVC.Models;
+﻿using EmployeeManagementMVC.DTOs;
 using EmployeeManagementMVC.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using X.PagedList.Extensions;
 
 namespace EmployeeManagementMVC.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly IEmployeeService _service; 
+        private readonly IEmployeeService _service;
 
         public EmployeeController(IEmployeeService service)
         {
@@ -85,7 +76,7 @@ namespace EmployeeManagementMVC.Controllers
             ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.EmailSortParam = sortOrder == "Email" ? "email_desc" : "Email";
             ViewBag.SalarySortParam = sortOrder == "Salary" ? "salary_desc" : "Salary";
-            
+
             var employees = await _service
                                     .GetEmployeesAsync(searchString, sortOrder, page, pageSize);
 
@@ -126,7 +117,7 @@ namespace EmployeeManagementMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-               await _service.AddAsync(employeeDto);
+                await _service.AddAsync(employeeDto);
                 return RedirectToAction(nameof(Index));
             }
             return View(employeeDto);
@@ -212,8 +203,8 @@ namespace EmployeeManagementMVC.Controllers
             //var employee = await _repository.GetByIdAsync(id);
             //if (employee != null)
             //{
-                //_context.Employees.Remove(employee);
-                await _service.DeleteAsync(id);
+            //_context.Employees.Remove(employee);
+            await _service.DeleteAsync(id);
             //}
 
             //await _context.SaveChangesAsync();
